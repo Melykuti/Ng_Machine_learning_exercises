@@ -36,7 +36,7 @@ Option b does batch processing of all images at once, takes 0.3 sec
 ]
 
 Bence Mélykúti
-09-19/03/2018, 27-30/1/2020
+09-19/03/2018, 27-31/01/2020
 '''
 
 import numpy as np
@@ -205,7 +205,7 @@ else: # option==7
 
 #tf.print(pred)
 
-# The output layer (logits) has 10 units, for digits 1,2,...,9,0. After taking argmax, you have to map the result of argmax, 0,1,2,...,9 to the required 1,2,...,9,0.
+# The output layer (pred) has 10 units, for digits 1,2,...,9,0. After taking argmax, you have to map the result of argmax, 0,1,2,...,9 to the required 1,2,...,9,0.
 pred_digit = tf.map_fn(lambda x: (tf.argmax(x, axis=0, output_type=tf.int32)+1) % 10, pred, dtype=tf.int32)
 
 
