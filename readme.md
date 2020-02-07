@@ -25,6 +25,7 @@ With questions or comments, please contact [Bence Mélykúti](https://github.com
 * **ex3_nn_TF2.py** Neural networks. Forward propagation in an already trained network in `TensorFlow 2.0` (to use the network for classification).
 * **ex4.py** Neural networks. Forward propagation in an already trained network in `TensorFlow`. Computing the regularised cost function.
 * **ex4_TF1inTF2.py** Neural networks. Forward propagation in an already trained network using `TensorFlow 1` code of `ex4.py` in compatibility mode in `TensorFlow 2`. Computing the regularised cost function.
+* **ex4_TF2.py** Neural networks. Forward propagation in an already trained network in `TensorFlow 2.0`. Computing the regularised cost function.
 * **ex4\_premade.py** Backpropagation and training a neural network with a `TensorFlow` pre-made estimator
 * **ex4\_custom.py** Backpropagation and training a neural network with a `TensorFlow` custom estimator
 * **ex5.py** Regularised linear regression, i.e. ridge regression. Training set, cross-validation set, test set. Bias‒variance trade-off. Learning curves. Regularised polynomial regression. Selecting the regularisation parameter using a cross-validation set.
