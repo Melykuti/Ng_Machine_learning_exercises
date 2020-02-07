@@ -1,13 +1,16 @@
 '''
 Neural networks. Forward propagation in an already trained network in TensorFlow 2.0-2.1 (to use the network for classification).
 
-TF 2.1: option==2, 3, 4, 5 work; options 0, 1 and 6 fail with "AttributeError: 'RepeatedCompositeFieldContainer' object has no attribute 'append'" (But mine hasn't installed properly.)
-Option 2 takes 5.7-6.1 sec.
-Option 3 takes 3.1 sec.
-Option 4 takes 5.7-6 sec.
-Option 5 takes 1.8 sec.
-Option 7 takes 1.8 sec.
 TF 2.0:
+Option 0 takes 0.08 sec.
+Option 1 takes 0.08 sec.
+Option 6 takes 0.08 sec.
+Option 2 takes 4.7 sec.
+Option 3 takes 1.6 sec.
+Option 4 takes 5.2 sec.
+Option 5 takes 0.08 sec.
+Option 7 takes 0.06 sec.
+If pred_digit = tf.map_fn(lambda x: ...) is used, then it's much slower:
 Option 0 takes 1.75 sec.
 Option 1 takes 1.75 sec.
 Option 6 takes 1.8 sec.
@@ -17,13 +20,26 @@ Option 4 takes 6.3 sec.
 Option 5 takes 1.8 sec.
 Option 7 takes 1.8 sec.
 
+TF 2.1: option==2, 3, 4, 5, 7 work; options 0, 1 and 6 fail with "AttributeError: 'RepeatedCompositeFieldContainer' object has no attribute 'append'" (But mine hasn't installed properly.)
+Option 2 takes 4.5 sec.
+Option 3 takes 1.5 sec.
+Option 4 takes 4.4 sec.
+Option 5 takes 0.08 sec.
+Option 7 takes 0.06 sec.
+If pred_digit = tf.map_fn(lambda x: ...) is used, then it's much slower:
+Option 2 takes 5.7-6.1 sec.
+Option 3 takes 3.1 sec.
+Option 4 takes 5.7-6 sec.
+Option 5 takes 1.8 sec.
+Option 7 takes 1.8 sec.
+
 Be careful: 
 
 According to tf.keras.layers.Dense (https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense):
 output = activation(dot(input, kernel) + bias)
 The kernel matrix multiplies from right! (And the inputs are seen as a row vector.) This is why I have to transpose the loaded network parameters Theta1 and Theta2.
 
-# According to tf.layers.dense documentation (https://www.tensorflow.org/api_docs/python/tf/layers/dense):
+Earlier, according to r1.15 tf.layers.dense documentation (https://www.tensorflow.org/api_docs/python/tf/layers/dense):
 outputs = activation(inputs*kernel + bias)
 
 [In version for Tensorflow 1.x, there used to be two independent choices in program flow:
@@ -36,7 +52,7 @@ Option b does batch processing of all images at once, takes 0.3 sec
 ]
 
 Bence Mélykúti
-09-19/03/2018, 27-31/01/2020
+09-19/03/2018, 27/01-07/02/2020
 '''
 
 import numpy as np
@@ -48,7 +64,7 @@ import time
 
 ### User input ###
 
-option = 0 # {0, 1, ..., 7}
+option = 7 # {0, 1, ..., 7}
 
 ### End of input ###
 
@@ -152,6 +168,7 @@ elif option in [2, 3, 4, 5]:
     @tf.function
     def evaluation(Theta1, Theta2, data):
         # inside a @tf.function, I think all variables should be tf types, https://github.com/tensorflow/community/blob/master/rfcs/20180918-functions-not-sessions-20.md
+        # https://www.tensorflow.org/guide/effective_tf2#use_keras_layers_and_models_to_manage_variables
         l1 = tf.sigmoid(tf.matmul(data, Theta1[1:,:]) + Theta1[0,:])
         l2 = tf.sigmoid(tf.matmul(l1, Theta2[1:,:]) + Theta2[0,:])
         #l2 = tf.matmul(l1, Theta2[1:,:]) + Theta2[0,:] # One doesn't even need the last sigmoid function because it is monotone increasing and doesn't change the ordering for argmax.
@@ -206,7 +223,8 @@ else: # option==7
 #tf.print(pred)
 
 # The output layer (pred) has 10 units, for digits 1,2,...,9,0. After taking argmax, you have to map the result of argmax, 0,1,2,...,9 to the required 1,2,...,9,0.
-pred_digit = tf.map_fn(lambda x: (tf.argmax(x, axis=0, output_type=tf.int32)+1) % 10, pred, dtype=tf.int32)
+pred_digit = (tf.argmax(pred, axis=1) + 1) % 10
+#pred_digit = tf.map_fn(lambda x: (tf.argmax(x, axis=0, output_type=tf.int32)+1) % 10, pred, dtype=tf.int32) # This is rather slow!
 
 
 pred_np = pred_digit.numpy().reshape(-1,1)
