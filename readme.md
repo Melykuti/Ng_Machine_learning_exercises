@@ -5,7 +5,7 @@
 
 The course includes computer programming exercises, which are, for didactic reasons, in `octave`/`Matlab`. In order to explain the methods thoroughly, some exercises deal with implementation details that are useful to understand once but not very relevant in everyday applications (e.g. feedforward propagation and backpropagation for neural networks).
 
-My goal with this repository is to solve some of the exercises in `Python 3`, which is the most popular language in contemporary data science, using standard packages that one would use in real life to create reliable and fast code. I use `TensorFlow` for the neural networks (I developed my code in version 1.5) and the versatile `scikit-learn` package for the rest. File names ending in `_TF2` are adapted to the new `TensorFlow 2.0`.
+My goal with this repository is to solve some of the exercises in `Python 3`, which is the most popular language in contemporary data science, using standard packages that one would use in real life to create reliable and fast code. I use `TensorFlow` for the neural networks (I developed my code in version 1.5) and the versatile `scikit-learn` package for the rest. File names ending in `_TF2` are adapted to the significantly different `TensorFlow 2.0`.
 
 
 #### Author
@@ -26,6 +26,7 @@ With questions or comments, please contact [Bence Mélykúti](https://github.com
 * **ex4.py** Neural networks. Forward propagation in an already trained network in `TensorFlow`. Computing the regularised cost function.
 * **ex4_TF1inTF2.py** Neural networks. Forward propagation in an already trained network using `TensorFlow 1` code of `ex4.py` in compatibility mode in `TensorFlow 2`. Computing the regularised cost function.
 * **ex4_TF2.py** Neural networks. Forward propagation in an already trained network in `TensorFlow 2.0`. Computing the regularised cost function.
+* **ex4_TF2_evaluate.py** Similar to `ex4_TF2.py` but uses the `tf.keras.Model.evaluate()` method.
 * **ex4\_premade.py** Backpropagation and training a neural network with a `TensorFlow` pre-made estimator
 * **ex4\_custom.py** Backpropagation and training a neural network with a `TensorFlow` custom estimator
 * **ex5.py** Regularised linear regression, i.e. ridge regression. Training set, cross-validation set, test set. Bias‒variance trade-off. Learning curves. Regularised polynomial regression. Selecting the regularisation parameter using a cross-validation set.
