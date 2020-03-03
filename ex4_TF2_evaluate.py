@@ -13,7 +13,6 @@ Bence Mélykúti
 import numpy as np
 import scipy.io # to open Matlab's .mat files
 import tensorflow as tf
-#from tensorflow.python.ops import math_ops
 import matplotlib.pyplot as plt
 import time
 
