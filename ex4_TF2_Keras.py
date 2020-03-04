@@ -14,7 +14,7 @@ Yes, one can add regularisation (of kernel or bias or output) to each layer of t
 https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/Regularizer
 
 Bence Mélykúti
-09-17/03/2018, 03/03/2020
+09-17/03/2018, 03-04/03/2020
 '''
 
 import numpy as np
@@ -107,17 +107,21 @@ layers_model = [l0, l1]
 model = tf.keras.Sequential(layers_model)
 
 # y needs to be turned into one hot encoding
+'''
+# This works but it is very clumsy and slower than tf.one_hot().
 l10 = tf.feature_column.categorical_column_with_identity(key='labels', num_buckets=10)
 l11 = tf.feature_column.indicator_column(l10)
 l12 = tf.keras.layers.DenseFeatures(l11)
 layers_y = [l12]
 model_y = tf.keras.Sequential(layers_y)
 y_onehot = model_y.predict({'labels': y})
+'''
+y_onehot = tf.one_hot(y.reshape(-1), 10)
 
 dataset = tf.data.Dataset.from_tensor_slices((X.astype(np.float32),
-            y_onehot.astype(np.float32))).batch(batch_size)
+            y_onehot)).batch(batch_size)
 dataset_shuffled = tf.data.Dataset.from_tensor_slices((X.astype(np.float32),
-            y_onehot.astype(np.float32))).shuffle(len(y), reshuffle_each_iteration=True)\
+            y_onehot)).shuffle(len(y), reshuffle_each_iteration=True)\
             .batch(batch_size)
 
 if logits_option == 1:

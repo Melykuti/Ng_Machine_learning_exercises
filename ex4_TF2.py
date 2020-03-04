@@ -2,10 +2,10 @@
 Neural networks. Forward propagation in an already trained network in TensorFlow 2.0. Computing the regularised cost function.
 
 TF 2.0:
-sigmoid_step_option 0-4 all take 0.35 sec.
+sigmoid_step_option 0-4 all take 0.1-0.2 sec.
 
 Bence Mélykúti
-09-19/03/2018, 31/01-07/02/2020
+09-19/03/2018, 31/01-07/02, 04/03/2020
 '''
 
 import numpy as np
@@ -105,6 +105,7 @@ else:
     dataset_X = dataset.map(lambda x, y: x)
     pred = model.predict(dataset_X)
 
+# y needs to be turned into one hot encoding
 '''
 # Version for TensorFlow 1.x
 y_idcc = tf.feature_column.categorical_column_with_identity(key='labels', num_buckets=10)
@@ -112,13 +113,16 @@ y_onehot = tf.feature_column.indicator_column(y_idcc)
 y_layer = tf.feature_column.input_layer({'labels': y_temp}, y_onehot)
 loss = tf.losses.sigmoid_cross_entropy(y_layer, logits) * 10
 '''
-# y needs to be turned into one hot encoding
+'''
+# This works but it is very clumsy and about 0.2 sec slower than tf.one_hot().
 l10 = tf.feature_column.categorical_column_with_identity(key='labels', num_buckets=10)
 l11 = tf.feature_column.indicator_column(l10)
 l12 = tf.keras.layers.DenseFeatures(l11)
 layers_y = [l12]
 model_y = tf.keras.Sequential(layers_y)
 y_onehot = model_y.predict({'labels': y}).astype(np.int16)
+'''
+y_onehot = tf.one_hot(y.reshape(-1), 10)
 
 # Multiplying by 10 is needed only because the course material divides by number of samples but not by number of classes when taking the mean.
 if sigmoid_step_option in [0, 1]:

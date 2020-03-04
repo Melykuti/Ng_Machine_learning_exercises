@@ -4,10 +4,10 @@ Neural networks. Forward propagation in an already trained network in TensorFlow
 exec(open('ex4_TF2_evaluate.py').read())
 
 TF 2.0:
-sigmoid_step_option 0-4 all take 0.45-0.5 sec.
+sigmoid_step_option 0-4 all take 0.3 sec.
 
 Bence Mélykúti
-09-19/03/2018, 31/01-07/02, 28/02-02/03/2020
+09-19/03/2018, 31/01-07/02, 28/02-04/03/2020
 '''
 
 import numpy as np
@@ -94,6 +94,7 @@ else: # sigmoid_step_option=1
 
 model = tf.keras.Sequential(layers_model)
 
+# y needs to be turned into one hot encoding
 '''
 # Version for TensorFlow 1.x
 y_idcc = tf.feature_column.categorical_column_with_identity(key='labels', num_buckets=10)
@@ -101,15 +102,19 @@ y_onehot = tf.feature_column.indicator_column(y_idcc)
 y_layer = tf.feature_column.input_layer({'labels': y_temp}, y_onehot)
 loss = tf.losses.sigmoid_cross_entropy(y_layer, logits) * 10
 '''
-# y needs to be turned into one hot encoding
+'''
+# This works but it is very clumsy and about 0.2 sec slower than tf.one_hot().
 l10 = tf.feature_column.categorical_column_with_identity(key='labels', num_buckets=10)
 l11 = tf.feature_column.indicator_column(l10)
 l12 = tf.keras.layers.DenseFeatures(l11)
 layers_y = [l12]
 model_y = tf.keras.Sequential(layers_y)
 y_onehot = model_y.predict({'labels': y})
+'''
+y_onehot = tf.one_hot(y.reshape(-1), 10)
+
 dataset = tf.data.Dataset.from_tensor_slices((X.astype(np.float32),
-            y_onehot.astype(np.float32))).batch(batch_size)
+            y_onehot)).batch(batch_size)
 
 if sigmoid_step_option in [0, 1, 3]:
     if metric_choice_option==0:

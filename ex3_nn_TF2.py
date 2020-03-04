@@ -52,7 +52,7 @@ Option b does batch processing of all images at once, takes 0.3 sec
 ]
 
 Bence Mélykúti
-09-19/03/2018, 27/01-07/02/2020
+09-19/03/2018, 27/01-07/02, 28/02/2020
 '''
 
 import numpy as np
@@ -217,8 +217,8 @@ else: # option==7
     #pred = dataset.map(lambda x: evaluation2(tf.constant(Theta1[:,1:].T), tf.constant(Theta1[:,0]), tf.constant(Theta2[:,1:].T), tf.constant(Theta2[:,0].T), tf.reshape(x, [-1,400]))) # This works, in same time.
     pred = tf.concat([entry for entry in pred], axis=0)
 
-    # It is not used in this simplest form:
-    #pred = evaluation(tf.constant(Theta1.T), tf.constant(Theta2.T), dataset)
+    # It does not work in this simplest form:
+    #pred = evaluation2(tf.constant(Theta1[:,1:].T), tf.constant(Theta1[:,0]), tf.constant(Theta2[:,1:].T), tf.constant(Theta2[:,0].T), dataset)
 
 #tf.print(pred)
 
