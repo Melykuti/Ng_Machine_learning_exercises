@@ -30,6 +30,7 @@ With questions or comments, please contact [Bence Mélykúti](https://github.com
 * **ex4\_premade.py** Backpropagation and training a neural network with a `TensorFlow 1` pre-made estimator
 * **ex4\_custom.py** Backpropagation and training a neural network with a `TensorFlow 1` custom estimator
 * **ex4\_TF2\_Keras.py** Backpropagation and training a neural network with Keras in `TensorFlow 2.0`
+* **ex4\_TF2\_estimator.py** Backpropagation and training a neural network with a `TensorFlow 2.0` pre-made estimator. This is similar to `ex4_premade.py`.
 * **ex5.py** Regularised linear regression, i.e. ridge regression. Training set, cross-validation set, test set. Bias‒variance trade-off. Learning curves. Regularised polynomial regression. Selecting the regularisation parameter using a cross-validation set.
 * **ex6.py** Support vector machines. Plotting the decision boundary. Gaussian kernel (radial basis function kernel). Selecting the regularisation parameter using a cross-validation set.
 
