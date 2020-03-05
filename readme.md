@@ -19,7 +19,7 @@ With questions or comments, please contact [Bence Mélykúti](https://github.com
 * **ex1\_multi.py** Linear regression with multiple variables. Feature normalisation.
 * **ex2.py** Sigmoid function. Logistic regression. Plotting a linear decision boundary.
 * **ex2\_reg.py** Regularised logistic regression. Generating polynomial features. Plotting the decision boundary.
-* **ex3.py** One-versus-all regularised logistic regression
+* **ex3.py** One-versus-all regularised logistic regression.
 * **ex3_nn.py** Neural networks. Forward propagation in an already trained network in `TensorFlow` (to use the network for classification).
 * **ex3_nn_TF1inTF2.py** Neural networks. Forward propagation in an already trained network using `TensorFlow 1` code of `ex3_nn.py` in compatibility mode in `TensorFlow 2` (to use the network for classification).
 * **ex3_nn_TF2.py** Neural networks. Forward propagation in an already trained network in `TensorFlow 2.0` (to use the network for classification).
@@ -27,10 +27,11 @@ With questions or comments, please contact [Bence Mélykúti](https://github.com
 * **ex4_TF1inTF2.py** Neural networks. Forward propagation in an already trained network using `TensorFlow 1` code of `ex4.py` in compatibility mode in `TensorFlow 2`. Computing the regularised cost function.
 * **ex4_TF2.py** Neural networks. Forward propagation in an already trained network in `TensorFlow 2.0`. Computing the regularised cost function.
 * **ex4_TF2_evaluate.py** Similar to `ex4_TF2.py` but uses the `tf.keras.Model.evaluate()` method.
-* **ex4\_premade.py** Backpropagation and training a neural network with a `TensorFlow 1` pre-made estimator
-* **ex4\_custom.py** Backpropagation and training a neural network with a `TensorFlow 1` custom estimator
-* **ex4\_TF2\_Keras.py** Backpropagation and training a neural network with Keras in `TensorFlow 2.0`
+* **ex4\_premade.py** Backpropagation and training a neural network with a `TensorFlow 1` pre-made estimator.
+* **ex4\_custom.py** Backpropagation and training a neural network with a `TensorFlow 1` custom estimator.
+* **ex4\_TF2\_Keras.py** Backpropagation and training a neural network with a `TensorFlow 2.0` Keras model.
 * **ex4\_TF2\_estimator.py** Backpropagation and training a neural network with a `TensorFlow 2.0` pre-made estimator. This is similar to `ex4_premade.py`.
+* **ex4\_TF2\_custom.py** Backpropagation and training a neural network with a `TensorFlow 2.0` custom model, using `tf.GradientTape`.
 * **ex5.py** Regularised linear regression, i.e. ridge regression. Training set, cross-validation set, test set. Bias‒variance trade-off. Learning curves. Regularised polynomial regression. Selecting the regularisation parameter using a cross-validation set.
 * **ex6.py** Support vector machines. Plotting the decision boundary. Gaussian kernel (radial basis function kernel). Selecting the regularisation parameter using a cross-validation set.
 
